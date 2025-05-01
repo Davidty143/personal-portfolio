@@ -19,7 +19,7 @@ const Contact: FC = () => {
         <div className="flex justify-center space-x-8">
           {/* Gmail */}
           <a
-            href="mailto:youremail@example.com"
+            href="mailto:davidantonio.ty6@gmail.com"
             className="text-4xl text-white transition duration-300 hover:text-gray-400"
           >
             <FaEnvelope />
@@ -37,7 +37,7 @@ const Contact: FC = () => {
 
           {/* LinkedIn */}
           <a
-            href="https://linkedin.com/in/yourusername"
+            href="https://www.linkedin.com/in/davidantonioty/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-4xl text-white transition duration-300 hover:text-gray-400"
@@ -47,7 +47,7 @@ const Contact: FC = () => {
 
           {/* Facebook */}
           <a
-            href="https://facebook.com/yourusername"
+            href="https://www.facebook.com/davidantonio.ty"
             target="_blank"
             rel="noopener noreferrer"
             className="text-4xl text-white transition duration-300 hover:text-gray-400"

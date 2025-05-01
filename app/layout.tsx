@@ -24,15 +24,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <body
         className={`min-h-screen bg-background text-foreground font-sans antialiased ${inter.variable}`}
       >
-        <header className="fixed top-4 right-4 z-50">
-          <ThemeToggle />
-        </header>
+        <header className="fixed top-4 right-4 z-50"></header>
 
         <ThemeProvider>
           <HeroSection />
           <FloatingNav />
-          <ProjectsAndSkillsSection />
           <EducationSection />
+          <ProjectsAndSkillsSection />
           <Contact />
           <Footer />
           <main>{children}</main>

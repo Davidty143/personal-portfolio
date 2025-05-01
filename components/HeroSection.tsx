@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { User, Laptop, Book, Phone } from "phosphor-react"; // Import necessary Phosphor icons
+import { User, Laptop, Book, Phone, EnvelopeSimple } from "phosphor-react";
 
 export default function HeroSection() {
   const [isClient, setIsClient] = useState(false);
@@ -25,8 +25,28 @@ export default function HeroSection() {
             <p className="text-lg sm:text-xl text-gray-300">
               Junior UI/UX Designer & Full Stack Developer
             </p>
+
+            {/* Email with icon */}
+            <div className="flex items-center gap-3 text-gray-400 text-lg sm:text-lg justify-center lg:justify-start">
+              <EnvelopeSimple size={20} weight="bold" />
+              <a
+                href="mailto:davidantonio.ty6@gmail.com"
+                className="hover:underline"
+              >
+                davidantonio.ty6@gmail.com
+              </a>
+            </div>
+
+            {/* Mobile number with icon */}
+            <div className="flex items-center gap-3 text-gray-400 text-lg sm:text-lg justify-center lg:justify-start">
+              <Phone size={20} weight="bold" />
+              <a href="tel:+639123456789" className="hover:underline">
+                0931-729-1299
+              </a>
+            </div>
+
+            {/* Navigation Icons */}
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start mt-12 gap-6">
-              {/* Container for icons */}
               <div className="flex gap-6 items-center justify-center">
                 {/* Profile Icon */}
                 <a
@@ -39,7 +59,7 @@ export default function HeroSection() {
                 {/* Education Icon */}
                 <a
                   href="#education"
-                  className="p-3 bg-white hover:bg-gray-100 text-gray-800 rounded-full shadow-md transition-all hover:scale-105 flex items-center justify-center ring-4 ring-gray-600 ring-offset-2 ring-offset-gray-800 animate-wave-float-3"
+                  className="p-3 bg-white hover:bg-gray-100 text-gray-800 rounded-full shadow-md transition-all hover:scale-105 flex items-center justify-center ring-4 ring-gray-600 ring-offset-2 ring-offset-gray-800 animate-wave-float-2"
                 >
                   <Book size={24} weight="bold" />
                 </a>
@@ -47,7 +67,7 @@ export default function HeroSection() {
                 {/* Skills Icon */}
                 <a
                   href="#skills"
-                  className="p-3 bg-white hover:bg-gray-100 text-gray-800 rounded-full shadow-md transition-all hover:scale-105 flex items-center justify-center ring-4 ring-gray-600 ring-offset-2 ring-offset-gray-800 animate-wave-float-2"
+                  className="p-3 bg-white hover:bg-gray-100 text-gray-800 rounded-full shadow-md transition-all hover:scale-105 flex items-center justify-center ring-4 ring-gray-600 ring-offset-2 ring-offset-gray-800 animate-wave-float-3"
                 >
                   <Laptop size={24} weight="bold" />
                 </a>
@@ -64,7 +84,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* Right side: Profile Picture with circle background filled with white */}
+        {/* Right side: Profile Picture */}
         <div
           className="flex-shrink-0 w-full max-w-[28rem] h-full max-h-[28rem] sm:w-[22rem] sm:h-[22rem] md:w-[24rem] md:h-[24rem] lg:w-[26rem] lg:h-[26rem] xl:w-[28rem] xl:h-[28rem]
           rounded-full bg-white p-1 ring-4 ring-gray-600 ring-offset-4 ring-offset-gray-800
