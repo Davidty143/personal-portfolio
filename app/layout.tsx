@@ -3,7 +3,6 @@ import "./globals.css";
 import type { ReactNode } from "react";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
-import { ThemeToggle } from "@/components/theme-toggle";
 import HeroSection from "@/components/HeroSection";
 import EducationSection from "@/components/EducationSection";
 import ProjectsAndSkillsSection from "@/components/ProjectsAndSkillsSection";

@@ -23,7 +23,7 @@ export default function HeroSection() {
               David Antonio Ty
             </h1>
             <p className="text-lg sm:text-xl text-gray-300">
-              Junior UI/UX Designer & Full Stack Developer
+              Junior UI/UX Designer & Full Stack Developer _{" "}
             </p>
 
             {/* Email with icon */}
