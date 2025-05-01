@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState, ReactNode, FC } from "react";
+import { useEffect, useState, useRef, ReactNode, FC } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import {
   FaJs,
   FaReact,
@@ -29,16 +30,17 @@ interface Skill {
 }
 
 const ProjectsAndSkillsSection: FC = () => {
-  const [isClient, setIsClient] = useState<boolean>(false); // Client-side flag
+  const [isClient, setIsClient] = useState<boolean>(false);
   const [selectedProject, setSelectedProject] = useState<string>("Baybayani");
   const [currentSlide, setCurrentSlide] = useState<number>(0);
 
-  // Set isClient to true once the component has mounted
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  const baybayaniImages: string[] = [
+  const baybayaniImages = [
     "/images/b1.png",
     "/images/b2.png",
     "/images/b3.png",
@@ -53,17 +55,78 @@ const ProjectsAndSkillsSection: FC = () => {
     "/images/b12.png",
     "/images/b13.png",
   ];
+  const visconnImages = [
+    "/images/v1.png",
+    "/images/v2.png",
+    "/images/v3.png",
+    "/images/v4.png",
+    "/images/v5.png",
+    "/images/v6.png",
+    "/images/v7.png",
+    "/images/v8.png",
+    "/images/v9.png",
+    "/images/v10.png",
+  ];
+  const walletManagerImages = [
+    "/images/w1.png",
+    "/images/w2.png",
+    "/images/w3.png",
+    "/images/w4.png",
+    "/images/w5.png",
+    "/images/w6.png",
+    "/images/w7.png",
+    "/images/w8.png",
+    "/images/w9.png",
+    "/images/w10.png",
+    "/images/w11.png",
+  ];
+  const flowerClassifierImages = [
+    "/images/f1.png",
+    "/images/f2.png",
+    "/images/f3.png",
+    "/images/f4.png",
+    "/images/f5.png",
+  ];
 
-  // Set up an interval for switching slides when the Baybayani project is selected
-  useEffect(() => {
-    if (selectedProject !== "Baybayani") return;
+  const getSelectedProjectImages = () => {
+    switch (selectedProject) {
+      case "Baybayani":
+        return baybayaniImages;
+      case "Visconn":
+        return visconnImages;
+      case "Wallet Manager":
+        return walletManagerImages;
+      case "Flower Classifier":
+        return flowerClassifierImages;
+      default:
+        return [];
+    }
+  };
 
-    const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % baybayaniImages.length);
+  const startAutoSlide = () => {
+    clearInterval(intervalRef.current as NodeJS.Timeout);
+    const images = getSelectedProjectImages();
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
     }, 5000);
+  };
 
-    return () => clearInterval(interval);
+  useEffect(() => {
+    startAutoSlide();
+    return () => clearInterval(intervalRef.current as NodeJS.Timeout);
   }, [selectedProject]);
+
+  const handleNextImage = () => {
+    const images = getSelectedProjectImages();
+    setCurrentSlide((prev) => (prev + 1) % images.length);
+    startAutoSlide(); // reset timer
+  };
+
+  const handlePrevImage = () => {
+    const images = getSelectedProjectImages();
+    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length);
+    startAutoSlide(); // reset timer
+  };
 
   const skills: Skill[] = [
     { icon: <FaJs size={30} /> },
@@ -98,7 +161,6 @@ const ProjectsAndSkillsSection: FC = () => {
       id="skills"
       className="min-h-screen w-full bg-gradient-to-r from-gray-900 via-gray-800 to-gray-700 text-white px-4 sm:px-12 py-16 overflow-hidden"
     >
-      {/* Header */}
       <div className="text-center mb-8">
         <h1 className="text-4xl sm:text-5xl font-bold text-white mb-4">
           Project & Development
@@ -109,7 +171,6 @@ const ProjectsAndSkillsSection: FC = () => {
         </p>
       </div>
 
-      {/* Grid */}
       <div className="grid grid-cols-12 gap-6 max-w-screen-xl mx-auto items-center">
         {/* Skills */}
         <div className="col-span-12 sm:col-span-2">
@@ -147,7 +208,7 @@ const ProjectsAndSkillsSection: FC = () => {
                     setSelectedProject(project);
                     setCurrentSlide(0);
                   }}
-                  className={`text-sm sm:text-base transition font-medium ${
+                  className={`text-sm sm:text-base transition font-medium cursor-pointer ${
                     selectedProject === project
                       ? "text-white"
                       : "text-gray-300 hover:text-white"
@@ -158,41 +219,44 @@ const ProjectsAndSkillsSection: FC = () => {
               ))}
             </div>
 
-            {/* Add margin top to prevent image overlap */}
-            <div className="mt-16 sm:mt-20">
-              {/* Conditional rendering of images */}
-              {isClient && selectedProject === "Baybayani" && (
+            {/* Project Image */}
+            <div className="mt-16 sm:mt-20 relative">
+              {isClient && (
                 <div className="relative">
-                  {/* Make the image horizontally rectangular */}
-                  <img
-                    src={baybayaniImages[currentSlide]}
-                    alt={`Baybayani Slide ${currentSlide + 1}`}
-                    className="object-cover w-full h-[250px] sm:h-[400px] md:h-[480px] max-w-full max-h-full transition-all duration-700 "
-                  />
+                  <AnimatePresence mode="wait">
+                    <motion.img
+                      key={`${selectedProject}-${currentSlide}`}
+                      src={getSelectedProjectImages()[currentSlide]}
+                      alt={`${selectedProject} Slide ${currentSlide + 1}`}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
+                      className="object-cover w-full h-[250px] sm:h-[400px] md:h-[480px] max-w-full max-h-full"
+                    />
+                  </AnimatePresence>
+
+                  {/* Navigation Controls */}
+                  <div className="absolute top-1/2 left-0 right-0 flex justify-between transform -translate-y-1/2 px-4 opacity-60">
+                    <button
+                      onClick={handlePrevImage}
+                      className="text-white text-2xl bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-opacity duration-300 opacity-50 hover:opacity-100"
+                    >
+                      &#8249;
+                    </button>
+                    <button
+                      onClick={handleNextImage}
+                      className="text-white text-2xl bg-black bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-opacity duration-300 opacity-50 hover:opacity-100"
+                    >
+                      &#8250;
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
           </div>
         </div>
       </div>
-
-      {/* Scroll Animation */}
-      <style jsx>{`
-        @keyframes scrollVertical {
-          0% {
-            transform: translateY(0);
-          }
-          100% {
-            transform: translateY(-50%);
-          }
-        }
-
-        .scroll-vertical {
-          display: flex;
-          flex-direction: column;
-          animation: scrollVertical 60s linear infinite;
-        }
-      `}</style>
     </section>
   );
 };

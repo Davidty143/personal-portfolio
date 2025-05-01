@@ -289,3 +289,53 @@ html {
     transform: translateY(-12px);
   }
 }
+
+@keyframes scrollVertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes scrollVertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.scroll-vertical {
+  display: flex;
+  flex-direction: column;
+  animation: scrollVertical 60s linear infinite;
+}
+
+/* Fade image animation styles */
+.fade-image-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.fade-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+  pointer-events: none;
+}
+
+.fade-image.active {
+  opacity: 1;
+  z-index: 10;
+  pointer-events: auto;
+}

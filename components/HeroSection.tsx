@@ -23,7 +23,7 @@ export default function HeroSection() {
               David Antonio Ty
             </h1>
             <p className="text-lg sm:text-xl text-gray-300">
-              Junior UI/UX Designer & Full Stack Developer _{" "}
+              Aspiring Full Stack Developer and UI/UX Designer
             </p>
 
             {/* Email with icon */}
@@ -40,8 +40,20 @@ export default function HeroSection() {
             {/* Mobile number with icon */}
             <div className="flex items-center gap-3 text-gray-400 text-lg sm:text-lg justify-center lg:justify-start">
               <Phone size={20} weight="bold" />
-              <a href="tel:+639123456789" className="hover:underline">
+              <a href="tel:+639317291299" className="hover:underline">
                 0931-729-1299
+              </a>
+            </div>
+
+            {/* Resume Download Button */}
+            <div className="flex justify-center lg:justify-start">
+              <a
+                href="/RESUME-DavidAntonioTy.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block px-6 py-2 text-white font-semibold bg-gray-600 hover:bg-gray-500 rounded-md shadow-md transition-all hover:scale-105"
+              >
+                View Resume
               </a>
             </div>
 
